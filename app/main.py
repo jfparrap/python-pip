@@ -11,15 +11,16 @@ def run():
   countries = list(map(lambda x: x['Country'], data))
   percentages = list(map(lambda x: x['World Population Percentage'], data))
    '''
-  charts.generate_pie_chart(countries, percentages)
   df=pd.read_csv('data.csv')
-  df=df[df['Continent']== 'South America']
   countries=df['Country']
   percentages=df['World Population Percentage']
+  charts.generate_pie_chart(countries, percentages)
+  df=df[df['Continent']== 'South America']
   country = input('Type Country => ')
-  result = utils.population_by_country(data, country)
+  result = utils.population_by_country(df, country)
   if len(result) > 0:
-    labels, values = utils.get_population(result[0])
+    #labels, values = utils.get_population(result[0])
+    labels, values = utils.get_population(result)
     charts.generate_bar_chart(country,labels, values)
   
 if __name__ == '__main__':
